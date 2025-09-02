@@ -1,116 +1,114 @@
- // Constructor to initialize the list with a given max size
-    StudentListManager(int max_size) {
+#include <iostream>
+#include <algorithm> // Needed for swap in bubbleSort
+using namespace std;
+
+class ListSystem {
+private:
+    int* data;
+    int n;
+    int MAX;
+
+public:
+    // Constructor to initialize the list with a given max size
+    ListSystem(int max_size) {
         MAX = max_size;
-        studentIds = new int[MAX];
+        data = new int[MAX];
         n = 0;  // Initially, the list is empty
     }
 
     // Destructor to free the allocated memory
-    ~StudentListManager() {
-        delete[] studentIds;
+    ~ListSystem() {
+        delete[] data;
     }
 
-    // Append - Adds a student ID to the end of the list
-    void append(int studentId) {
+    // Append - Adds a record to the end of the list
+    void append(int value) {
         if (n == MAX) {
-            cout << "Error: Student list is full (maximum " << MAX << " students)" << endl;
+            cout << "Error: Array is full" << endl;
         } else {
-            studentIds[n] = studentId;
+            data[n] = value;
             n++;
-            cout << "Student ID " << studentId << " added successfully!" << endl;
+            cout << "Append successful" << endl;
         }
     }
 
-    // Replace - Replace a student ID at index k with new student ID
-    void replace(int index, int newStudentId) {
-        if (index < 0 || index >= n) {
-            cout << "Error: Invalid student position (valid range: 0-" << (n-1) << ")" << endl;
+    // Replace - Replace a value at index k with new value
+    void replace(int k, int newValue) {
+        if (k < 0 || k >= n) {
+            cout << "Error: Index out of bounds" << endl;
         } else {
-            int oldId = studentIds[index];
-            studentIds[index] = newStudentId;
-            cout << "Student ID " << oldId << " at position " << index << " replaced with " << newStudentId << endl;
+            data[k] = newValue;
+            cout << "Replacement successful" << endl;
         }
     }
 
-    // Insert - Inserts a student ID at position pos
-    void insert(int pos, int studentId) {
+    // Insert - Inserts a value at position pos
+    void insert(int pos, int value) {
         if (n == MAX) {
-            cout << "Error: Student list is full" << endl;
+            cout << "Error: Array is full" << endl;
         } else if (pos < 0 || pos > n) {
-            cout << "Error: Invalid position (valid range: 0-" << n << ")" << endl;
+            cout << "Invalid position" << endl;
         } else {
             for (int i = n; i > pos; i--) {
-                studentIds[i] = studentIds[i - 1];
+                data[i] = data[i - 1];
             }
-            studentIds[pos] = studentId;
+            data[pos] = value;
             n++;
-            cout << "Student ID " << studentId << " inserted at position " << pos << endl;
+            cout << "Insertion successful" << endl;
         }
     }
 
-    // Delete - Deletes a student at position pos
+    // Delete - Deletes a value at position pos
     void deleteAt(int pos) {
         if (n == 0) {
-            cout << "Error: No students in the list" << endl;
+            cout << "Array empty" << endl;
         } else if (pos < 0 || pos >= n) {
-            cout << "Error: Invalid position (valid range: 0-" << (n-1) << ")" << endl;
+            cout << "Invalid position" << endl;
         } else {
-            int deletedId = studentIds[pos];
             for (int i = pos; i < n - 1; i++) {
-                studentIds[i] = studentIds[i + 1];
+                data[i] = data[i + 1];
             }
             n--;
-            cout << "Student ID " << deletedId << " deleted from position " << pos << endl;
+            cout << "Deletion successful" << endl;
         }
     }
 
-    // Search - Search for a student ID in the list
-    int search(int studentId) {
+    // Search - Search for an element in the list
+    int search(int key) {
         for (int i = 0; i < n; i++) {
-            if (studentIds[i] == studentId) {
+            if (data[i] == key) {
                 return i;
             }
         }
         return -1; // Not found
     }
 
-    // BubbleSort - Sorts the student IDs in ascending order
+    // BubbleSort - Sorts the list in ascending order
     void bubbleSort() {
-        if (n == 0) {
-            cout << "No students to sort" << endl;
-            return;
-        }
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (studentIds[j] > studentIds[j + 1]) {
-                    swap(studentIds[j], studentIds[j + 1]);
+                if (data[j] > data[j + 1]) {
+                    swap(data[j], data[j + 1]);
                 }
             }
         }
-        cout << "Student list sorted by ID successfully!" << endl;
+        cout << "Sort successful" << endl;
     }
 
     // Export array data (for catenation/merge)
     void exportArray(int* arr) {
         for (int i = 0; i < n; i++) {
-            arr[i] = studentIds[i];
+            arr[i] = data[i];
         }
     }
 
-    // Display the current student list
-    void display(const string& listName = "Student List") {
-        cout << "\n=== " << listName << " ===" << endl;
-        if (n == 0) {
-            cout << "No students in this list." << endl;
-        } else {
-            cout << "Total students: " << n << endl;
-            cout << "Student IDs: ";
-            for (int i = 0; i < n; i++) {
-                cout << studentIds[i] << " ";
-            }
-            cout << endl;
+    // Display the current list
+    void display(const char* name = "Array") {
+        cout << name << ": ";
+        for (int i = 0; i < n; i++) {
+            cout << data[i] << " ";
         }
-        cout << "===================" << endl;
+        cout << endl;
     }
 
     // Get the current size of the list
@@ -118,61 +116,45 @@
         return n;
     }
 
-    // Catenate two student lists into this list
-    void catenate(const int* list1, int n1, const int* list2, int n2) {
+    // Set from external array
+    void setFromArray(const int* arr, int arrSize) {
+        n = arrSize;
+        for (int i = 0; i < n; i++) {
+            data[i] = arr[i];
+        }
+    }
+
+    // Catenate arr1 and arr2 into this list (for C)
+    void catenate(const int* arr1, int n1, const int* arr2, int n2) {
         if (n1 + n2 > MAX) {
-            cout << "Error: Not enough space to concatenate lists" << endl;
+            cout << "Error: Not enough space to concatenate" << endl;
             n = 0;
             return;
         }
         n = 0;
-        for (int i = 0; i < n1; i++) studentIds[n++] = list1[i];
-        for (int i = 0; i < n2; i++) studentIds[n++] = list2[i];
-        cout << "Student lists concatenated successfully!" << endl;
+        for (int i = 0; i < n1; i++) data[n++] = arr1[i];
+        for (int i = 0; i < n2; i++) data[n++] = arr2[i];
+        cout << "Catenation successful" << endl;
     }
 
-    // Merge two sorted student lists into this list
-    void merge(const int* list1, int n1, const int* list2, int n2) {
+    // Merge two sorted arrays into this list (for C)
+    void merge(const int* arr1, int n1, const int* arr2, int n2) {
         if (n1 + n2 > MAX) {
-            cout << "Error: Not enough space to merge lists" << endl;
+            cout << "Error: Not enough space to merge" << endl;
             n = 0;
             return;
         }
         int i = 0, j = 0;
         n = 0;
         while (i < n1 && j < n2) {
-            if (list1[i] <= list2[j]) studentIds[n++] = list1[i++];
-            else studentIds[n++] = list2[j++];
+            if (arr1[i] <= arr2[j]) data[n++] = arr1[i++];
+            else data[n++] = arr2[j++];
         }
-        while (i < n1) studentIds[n++] = list1[i++];
-        while (j < n2) studentIds[n++] = list2[j++];
-        cout << "Student lists merged successfully!" << endl;
-    }
-
-    // Check if list is empty
-    bool isEmpty() {
-        return n == 0;
+        while (i < n1) data[n++] = arr1[i++];
+        while (j < n2) data[n++] = arr2[j++];
+        cout << "Merge successful" << endl;
     }
 };
-
-void displayMenu() {
-    cout << "\n========================================" << endl;
-    cout << "    STUDENT LIST MANAGEMENT SYSTEM" << endl;
-    cout << "========================================" << endl;
-    cout << "1. Access student attendance list (display)" << endl;
-    cout << "2. Append student data to array" << endl;
-    cout << "3. Replace student data" << endl;
-    cout << "4. Insert student in scholarship slot" << endl;
-    cout << "5. Delete student data records" << endl;
-    cout << "6. Search student from records" << endl;
-    cout << "7. Sort students by ID" << endl;
-    cout << "8. Concatenate student lists" << endl;
-    cout << "9. Merge student lists" << endl;
-    cout << "10. Exit system" << endl;
-    cout << "========================================" << endl;
-    cout << "Enter your choice (1-10): ";
-}
-
 
 int main() {
     // Create three arrays
@@ -243,4 +225,5 @@ int main() {
 
     return 0;
 }
+
 
