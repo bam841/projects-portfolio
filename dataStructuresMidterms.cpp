@@ -32,6 +32,11 @@ public:
         }
     }
 
+    
+    
+
+
+
     // Replace - Replace a value at index k with new value
     void replace(int k, int newValue) {
         if (k < 0 || k >= n) {
@@ -157,10 +162,12 @@ public:
 };
 
 int main() {
+     
     // Create three arrays
     ListSystem A(10); // Array A
     ListSystem B(10); // Array B
     ListSystem C(20); // Array C (for catenate/merge results)
+    int ans ; 
 
     cout<<"what would you like to do please choose from the options below"<< endl;
     cout<< "1.  access student attendance list (access) "<<  endl;
@@ -171,12 +178,58 @@ int main() {
     cout<<"6. search student from the chosen student recor" <<endl;
     cout<<"7. sort students by age  from the chosen array" <<endl;
     cout<<"8. catenate students" <<endl;
-    cout<<"5. merge all students" <<endl;
+    cout<<"9. merge all students" <<endl;
+    cout<<"10.exit"<< endl;
+    
+
+    cout<<"please choose from any of the options below: ";
+    cin>> ans; 
+     A.append(10);
+    // if statement for the choices
+    if(ans== 1 ) {
+        int access = 3;
+        cout<<"which array would you want to access  press 1 for array 1 and 2 for array 2" << endl;
+        cin>> access;
+        switch(access) {
+            case 1:  
+                cout<<" you have chosen to access the array 1" << endl;
+                A.display("array A");
+            break;
+            case 2:
+
+            cout<<"you have chosen to access array 2"<< endl;
+            B.display("array B");
+
+        } 
+    }
+    if(ans== 2 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 3 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 4 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 5 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 6 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 7 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+    if(ans== 8 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+
+    
 
     
     
     
-    // Add elements to A
+    /* Add elements to A
     A.append(10);
     A.append(20);
     A.append(30);
@@ -222,8 +275,9 @@ int main() {
     B.exportArray(arrB);
     C.merge(arrA, sizeA, arrB, sizeB);
     C.display("C = merge(A, B)");
-
+*/
     return 0;
 }
+
 
 
