@@ -1,7 +1,8 @@
 #include <iostream>
 #include <algorithm> // Needed for swap in bubbleSort
 using namespace std;
-
+ int access = 3;
+int studentNum = 0;
 class ListSystem {
 private:
     int* data;
@@ -9,6 +10,7 @@ private:
     int MAX;
 
 public:
+
     // Constructor to initialize the list with a given max size
     ListSystem(int max_size) {
         MAX = max_size;
@@ -167,8 +169,10 @@ int main() {
     ListSystem A(10); // Array A
     ListSystem B(10); // Array B
     ListSystem C(20); // Array C (for catenate/merge results)
+    A.append(10);
     int ans ; 
-
+    bool loop = true;
+     while(loop){
     cout<<"what would you like to do please choose from the options below"<< endl;
     cout<< "1.  access student attendance list (access) "<<  endl;
     cout<< "2.  append student data array(append)" << endl;
@@ -184,10 +188,12 @@ int main() {
 
     cout<<"please choose from any of the options below: ";
     cin>> ans; 
-     A.append(10);
+     
     // if statement for the choices
+    
     if(ans== 1 ) {
-        int access = 3;
+        
+       
         cout<<"which array would you want to access  press 1 for array 1 and 2 for array 2" << endl;
         cin>> access;
         switch(access) {
@@ -202,28 +208,60 @@ int main() {
 
         } 
     }
+         // aappend data into the array
     if(ans== 2 ) {
-        cout<<"feature not yet added"<< endl;
+        
+        cout<<"please enter which class you would like to add a student  : "<< endl;
+        cin>> access;
+         switch (access){
+             case 1: 
+            cout<<"you now chose to access class A"<< endl;
+                 // display the class liss
+             cout<<" this is the current list of class A: ";
+              A.display("array A");
+             cout<< "please input student number here:  ";
+             cin>> studentNum;
+             A.append(studentNum);
+             
+             
+         }
+        
+        
     }
+         // replace
     if(ans== 3 ) {
         cout<<"feature not yet added"<< endl;
     }
+         // insert
     if(ans== 4 ) {
         cout<<"feature not yet added"<< endl;
     }
+         // delete
     if(ans== 5 ) {
         cout<<"feature not yet added"<< endl;
     }
+        // sarch 
     if(ans== 6 ) {
         cout<<"feature not yet added"<< endl;
     }
+         // sort
     if(ans== 7 ) {
         cout<<"feature not yet added"<< endl;
     }
+         // catenate 
     if(ans== 8 ) {
         cout<<"feature not yet added"<< endl;
     }
-
+         // merge
+    if(ans== 9 ) {
+        cout<<"feature not yet added"<< endl;
+    }
+         // exit
+      if(ans== 10) {
+        cout<<"feature not yet added"<< endl;
+    }
+         
+}
     
 
     
@@ -278,6 +316,7 @@ int main() {
 */
     return 0;
 }
+
 
 
 
