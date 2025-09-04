@@ -3,6 +3,7 @@
 using namespace std;
  int access = 3;
 int studentNum = 0;
+int replace;
 class ListSystem {
 private:
     int* data;
@@ -33,11 +34,6 @@ public:
             cout << "Append successful" << endl;
         }
     }
-
-    
-    
-
-
 
     // Replace - Replace a value at index k with new value
     void replace(int k, int newValue) {
@@ -110,13 +106,18 @@ public:
     }
 
     // Display the current list
-    void display(const char* name = "Array") {
-        cout << name << ": ";
-        for (int i = 0; i < n; i++) {
-            cout << data[i] << " ";
+void display(const char* name = "Array") {
+    cout << name << " status: " << endl;
+    for (int i = 0; i < MAX; i++) {
+        if (i < n) {
+            cout << "Index " << i << " → " << data[i] << endl;
+        } else {
+            cout << "Index " << i << " → [empty]" << endl;
         }
-        cout << endl;
     }
+    cout << "Total stored: " << n << "/" << MAX << endl;
+}
+
 
     // Get the current size of the list
     int size() {
@@ -212,6 +213,7 @@ int main() {
     if(ans== 2 ) {
         
         cout<<"please enter which class you would like to add a student  : "<< endl;
+        cout<<"press 1 for class A, and press 2 for class b";
         cin>> access;
          switch (access){
              case 1: 
@@ -219,18 +221,40 @@ int main() {
                  // display the class liss
              cout<<" this is the current list of class A: ";
               A.display("array A");
-             cout<< "please input student number here:  ";
+             cout<< "please input the student number that you want to append in this class:   ";
              cin>> studentNum;
              A.append(studentNum);
-             
-             
+              break;
+          case 2: 
+          cout<<"you have now chosen to access the class B"<< endl;
+          cout<<"this is the current list of class B: ";
+          B.display("array B");
+          cout<<"please input the student number that you want to append on this class: "; 
+          cin>>  studentNum; 
+          B.append(studentNum); 
+          
+          
          }
         
         
     }
          // replace
     if(ans== 3 ) {
-        cout<<"feature not yet added"<< endl;
+        cout<<"hi there please choose where you want to remove student from, press 1 for class A, press 2 for class b: ";
+      switch(access){
+       case 1: 
+       cout<<"hi there you have chosen to access class A ";
+       break; 
+       case 2: 
+       cout<<"hi there! you have chosen to access Class: B";
+       cout <<"this is the current list of the class"; 
+       B.display("array B");
+        cout<<"which index would you like to choose to replace? ";
+       
+      }
+     // A.replace(1, 22); // Replace index 1
+     
+     
     }
          // insert
     if(ans== 4 ) {
@@ -281,7 +305,7 @@ int main() {
     B.display("B");
 
     // Demonstrate basic operations on A
-    A.replace(1, 22); // Replace index 1
+   
     A.display("A after replace");
 
     A.insert(1, 12); // Insert at index 1
@@ -316,6 +340,7 @@ int main() {
 */
     return 0;
 }
+
 
 
 
