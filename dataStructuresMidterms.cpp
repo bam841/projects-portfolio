@@ -36,9 +36,10 @@ public:
     }
 
     // Replace - Replace a value at index k with new value
+// k represents the index 
     void replace(int k, int newValue) {
         if (k < 0 || k >= n) {
-            cout << "Error: Index out of bounds" << endl;
+            cout << "Error: Index out of bounds , you might need to append a value first" << endl;
         } else {
             data[k] = newValue;
             cout << "Replacement successful" << endl;
@@ -203,7 +204,7 @@ int main() {
                     cout << "Invalid choice.\n";
             }
         } 
-        else if (ans == 2) {
+         if (ans == 2) {
             cout << "Which class do you want to add a student to? (1 for A, 2 for B): ";
             cin >> access;
             switch (access) {
@@ -225,7 +226,7 @@ int main() {
                     cout << "Invalid class choice.\n";
             }
         } 
-        else if (ans == 3) {
+         if (ans == 3) {
             cout << "Choose class for replacement (1 for A, 2 for B): ";
             cin >> access;
             int rep, newVal;
@@ -252,25 +253,28 @@ int main() {
                     cout << "Invalid class choice.\n";
             }
         }
-        else if (ans == 4) {
+        // insert
+         if (ans == 4) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 5) {
+        // delete
+         if (ans == 5) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 6) {
+        
+         if (ans == 6) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 7) {
+         if (ans == 7) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 8) {
+         if (ans == 8) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 9) {
+         if (ans == 9) {
             cout << "Feature not yet added.\n";
         }
-        else if (ans == 10) {
+         if (ans == 10) {
             cout << "Exiting program.\n";
             loop = false;
         }
@@ -281,3 +285,4 @@ int main() {
 
     return 0;
 }
+
