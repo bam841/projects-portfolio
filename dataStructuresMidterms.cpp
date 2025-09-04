@@ -1,9 +1,10 @@
 #include <iostream>
 #include <algorithm> // Needed for swap in bubbleSort
 using namespace std;
- int access = 3;
+
+int access = 3;
 int studentNum = 0;
-int replace;
+
 class ListSystem {
 private:
     int* data;
@@ -11,7 +12,6 @@ private:
     int MAX;
 
 public:
-
     // Constructor to initialize the list with a given max size
     ListSystem(int max_size) {
         MAX = max_size;
@@ -106,18 +106,17 @@ public:
     }
 
     // Display the current list
-void display(const char* name = "Array") {
-    cout << name << " status: " << endl;
-    for (int i = 0; i < MAX; i++) {
-        if (i < n) {
-            cout << "Index " << i << " → " << data[i] << endl;
-        } else {
-            cout << "Index " << i << " → [empty]" << endl;
+    void display(const char* name = "Array") {
+        cout << name << " status: " << endl;
+        for (int i = 0; i < MAX; i++) {
+            if (i < n) {
+                cout << "Index " << i << " → " << data[i] << endl;
+            } else {
+                cout << "Index " << i << " → [empty]" << endl;
+            }
         }
+        cout << "Total stored: " << n << "/" << MAX << endl;
     }
-    cout << "Total stored: " << n << "/" << MAX << endl;
-}
-
 
     // Get the current size of the list
     int size() {
@@ -165,183 +164,120 @@ void display(const char* name = "Array") {
 };
 
 int main() {
-     
     // Create three arrays
     ListSystem A(10); // Array A
     ListSystem B(10); // Array B
     ListSystem C(20); // Array C (for catenate/merge results)
-    A.append(10);
-    int ans ; 
+
+    int ans;
     bool loop = true;
-     while(loop){
-    cout<<"what would you like to do please choose from the options below"<< endl;
-    cout<< "1.  access student attendance list (access) "<<  endl;
-    cout<< "2.  append student data array(append)" << endl;
-    cout<< "3. replace the student(replace)"<<  endl;
-    cout<<"4.  insert student in a scholarship slot inside the array " <<endl;
-    cout<<"5. delete student data records from the chosen grade" <<endl;
-    cout<<"6. search student from the chosen student recor" <<endl;
-    cout<<"7. sort students by age  from the chosen array" <<endl;
-    cout<<"8. catenate students" <<endl;
-    cout<<"9. merge all students" <<endl;
-    cout<<"10.exit"<< endl;
-    
 
-    cout<<"please choose from any of the options below: ";
-    cin>> ans; 
-     
-    // if statement for the choices
-    
-    if(ans== 1 ) {
-        
-       
-        cout<<"which array would you want to access  press 1 for array 1 and 2 for array 2" << endl;
-        cin>> access;
-        switch(access) {
-            case 1:  
-                cout<<" you have chosen to access the array 1" << endl;
-                A.display("array A");
-            break;
-            case 2:
+    while (loop) {
+        cout << "\nWhat would you like to do? Please choose from the options below:\n";
+        cout << "1.  Access student attendance list\n";
+        cout << "2.  Append student data to array\n";
+        cout << "3.  Replace a student\n";
+        cout << "4.  Insert student in a scholarship slot\n";
+        cout << "5.  Delete student data record\n";
+        cout << "6.  Search for a student\n";
+        cout << "7.  Sort students by age\n";
+        cout << "8.  Catenate students\n";
+        cout << "9.  Merge all students\n";
+        cout << "10. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> ans;
 
-            cout<<"you have chosen to access array 2"<< endl;
-            B.display("array B");
-
+        if (ans == 1) {
+            cout << "Which array do you want to access? (1 for A, 2 for B): ";
+            cin >> access;
+            switch (access) {
+                case 1:
+                    cout << "You chose array A.\n";
+                    A.display("Array A");
+                    break;
+                case 2:
+                    cout << "You chose array B.\n";
+                    B.display("Array B");
+                    break;
+                default:
+                    cout << "Invalid choice.\n";
+            }
         } 
+        else if (ans == 2) {
+            cout << "Which class do you want to add a student to? (1 for A, 2 for B): ";
+            cin >> access;
+            switch (access) {
+                case 1:
+                    cout << "Current list of Class A:\n";
+                    A.display("Array A");
+                    cout << "Enter student number to append: ";
+                    cin >> studentNum;
+                    A.append(studentNum);
+                    break;
+                case 2:
+                    cout << "Current list of Class B:\n";
+                    B.display("Array B");
+                    cout << "Enter student number to append: ";
+                    cin >> studentNum;
+                    B.append(studentNum);
+                    break;
+                default:
+                    cout << "Invalid class choice.\n";
+            }
+        } 
+        else if (ans == 3) {
+            cout << "Choose class for replacement (1 for A, 2 for B): ";
+            cin >> access;
+            int rep, newVal;
+            switch (access) {
+                case 1:
+                    cout << "Current list of Class A:\n";
+                    A.display("Array A");
+                    cout << "Enter index to replace: ";
+                    cin >> rep;
+                    cout << "Enter new student number: ";
+                    cin >> newVal;
+                    A.replace(rep, newVal);
+                    break;
+                case 2:
+                    cout << "Current list of Class B:\n";
+                    B.display("Array B");
+                    cout << "Enter index to replace: ";
+                    cin >> rep;
+                    cout << "Enter new student number: ";
+                    cin >> newVal;
+                    B.replace(rep, newVal);
+                    break;
+                default:
+                    cout << "Invalid class choice.\n";
+            }
+        }
+        else if (ans == 4) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 5) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 6) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 7) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 8) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 9) {
+            cout << "Feature not yet added.\n";
+        }
+        else if (ans == 10) {
+            cout << "Exiting program.\n";
+            loop = false;
+        }
+        else {
+            cout << "Invalid choice. Try again.\n";
+        }
     }
-         // aappend data into the array
-    if(ans== 2 ) {
-        
-        cout<<"please enter which class you would like to add a student  : "<< endl;
-        cout<<"press 1 for class A, and press 2 for class b";
-        cin>> access;
-         switch (access){
-             case 1: 
-            cout<<"you now chose to access class A"<< endl;
-                 // display the class liss
-             cout<<" this is the current list of class A: ";
-              A.display("array A");
-             cout<< "please input the student number that you want to append in this class:   ";
-             cin>> studentNum;
-             A.append(studentNum);
-              break;
-          case 2: 
-          cout<<"you have now chosen to access the class B"<< endl;
-          cout<<"this is the current list of class B: ";
-          B.display("array B");
-          cout<<"please input the student number that you want to append on this class: "; 
-          cin>>  studentNum; 
-          B.append(studentNum); 
-          
-          
-         }
-        
-        
-    }
-         // replace
-    if(ans== 3 ) {
-        cout<<"hi there please choose where you want to remove student from, press 1 for class A, press 2 for class b: ";
-      switch(access){
-       case 1: 
-       cout<<"hi there you have chosen to access class A ";
-       break; 
-       case 2: 
-       cout<<"hi there! you have chosen to access Class: B";
-       cout <<"this is the current list of the class"; 
-       B.display("array B");
-        cout<<"which index would you like to choose to replace? ";
-       
-      }
-     // A.replace(1, 22); // Replace index 1
-     
-     
-    }
-         // insert
-    if(ans== 4 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-         // delete
-    if(ans== 5 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-        // sarch 
-    if(ans== 6 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-         // sort
-    if(ans== 7 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-         // catenate 
-    if(ans== 8 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-         // merge
-    if(ans== 9 ) {
-        cout<<"feature not yet added"<< endl;
-    }
-         // exit
-      if(ans== 10) {
-        cout<<"feature not yet added"<< endl;
-    }
-         
-}
-    
 
-    
-    
-    
-    /* Add elements to A
-    A.append(10);
-    A.append(20);
-    A.append(30);
-    cout << "Initial ";
-    A.display("A");
-
-    // Add elements to B
-    B.append(15);
-    B.append(25);
-    cout << "Initial ";
-    B.display("B");
-
-    // Demonstrate basic operations on A
-   
-    A.display("A after replace");
-
-    A.insert(1, 12); // Insert at index 1
-    A.display("A after insert");
-
-    A.deleteAt(2); // Delete index 2
-    A.display("A after delete");
-
-    int idx = A.search(22);
-    cout << "Index of 22 in A: ";
-    if (idx != -1) cout << idx << endl;
-    else cout << "Not found" << endl;
-
-    A.bubbleSort();
-    A.display("A after sort");
-
-    // Catenate A and B into C
-    int arrA[10], arrB[10];
-    int sizeA = A.size(), sizeB = B.size();
-    A.exportArray(arrA);
-    B.exportArray(arrB);
-    C.catenate(arrA, sizeA, arrB, sizeB);
-    C.display("C = A + B (catenate)");
-
-    // Merge A and B into C (both sorted)
-    A.bubbleSort();
-    B.bubbleSort();
-    A.exportArray(arrA);
-    B.exportArray(arrB);
-    C.merge(arrA, sizeA, arrB, sizeB);
-    C.display("C = merge(A, B)");
-*/
     return 0;
 }
-
-
-
-
-
