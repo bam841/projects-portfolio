@@ -255,7 +255,11 @@ int main() {
         }
         // insert
          if (ans == 4) {
-            cout << "Feature not yet added.\n";
+             int InserVal;
+         // insert the value  into  an empty slot
+             cout<<"hi there please input the value that you  want to insert within the array ";
+            
+             
         }
         // delete
          if (ans == 5) {
@@ -285,4 +289,5 @@ int main() {
 
     return 0;
 }
+
 
