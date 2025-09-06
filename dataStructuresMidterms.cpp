@@ -78,14 +78,17 @@ public:
     }
 
     // Search - Search for an element in the list
-    int search(int key) {
-        for (int i = 0; i < n; i++) {
-            if (data[i] == key) {
-                return i;
-            }
+  int search(int key) {
+    for (int i = 0; i < n; i++) {
+        if (data[i] == key) {
+            cout << "Data has been found at index " << i << endl;
+            return i;
         }
-        return -1; // Not found
     }
+    cout << "Data not found" << endl;
+    return -1; // Not found
+}
+
 
     // BubbleSort - Sorts the list in ascending order
     void bubbleSort() {
@@ -135,7 +138,7 @@ public:
     // Catenate arr1 and arr2 into this list (for C)
     void catenate(const int* arr1, int n1, const int* arr2, int n2) {
         if (n1 + n2 > MAX) {
-            cout << "Error: Not enough space to concatenate" << endl;
+            cout << "Error: Not enough space to concatenate the two arrays" << endl;
             n = 0;
             return;
         }
@@ -169,6 +172,10 @@ int main() {
     ListSystem A(10); // Array A
     ListSystem B(10); // Array B
     ListSystem C(20); // Array C (for catenate/merge results)
+    B.append(10);
+    A.append(21);
+    B.append(22);
+    
 
     int ans;
     bool loop = true;
@@ -187,7 +194,7 @@ int main() {
         cout << "10. Exit\n";
         cout << "Enter your choice: ";
         cin >> ans;
-
+            // access
         if (ans == 1) {
             cout << "Which array do you want to access? (1 for A, 2 for B): ";
             cin >> access;
@@ -203,8 +210,9 @@ int main() {
                 default:
                     cout << "Invalid choice.\n";
             }
-        } 
-         if (ans == 2) {
+        }
+            // apppend 
+        else if (ans == 2) {
             cout << "Which class do you want to add a student to? (1 for A, 2 for B): ";
             cin >> access;
             switch (access) {
@@ -225,8 +233,9 @@ int main() {
                 default:
                     cout << "Invalid class choice.\n";
             }
-        } 
-         if (ans == 3) {
+        }
+            // replacement 
+        else if (ans == 3) {
             cout << "Choose class for replacement (1 for A, 2 for B): ";
             cin >> access;
             int rep, newVal;
@@ -253,32 +262,111 @@ int main() {
                     cout << "Invalid class choice.\n";
             }
         }
-        // insert
-         if (ans == 4) {
-             int InserVal;
-         // insert the value  into  an empty slot
-             cout<<"hi there please input the value that you  want to insert within the array ";
-            
-             
+            // insert
+        else if (ans == 4) {
+            int InsertVal, Ipos;
+            cout << "Which class do you want to insert into? (1 for A, 2 for B): ";
+            cin >> access;
+
+            switch (access) {
+                case 1:
+                    cout << "You chose array A.\n";
+                    A.display("Array A");
+                    cout << "Enter index where you want to insert: ";
+                    cin >> Ipos;
+                    cout << "Enter student id to insert: ";
+                    cin >> InsertVal;
+                    A.insert(Ipos, InsertVal);
+                    break;
+
+                case 2:
+                    cout << "You chose array B.\n";
+                    B.display("Array B");
+                    cout << "Enter index where you want to insert: ";
+                    cin >> Ipos;
+                    cout << "Enter student id to insert: ";
+                    cin >> InsertVal;
+                    B.insert(Ipos, InsertVal);
+                    break;
+
+                default:
+                    cout << "Invalid class choice.\n";
+            }
         }
-        // delete
-         if (ans == 5) {
-            cout << "Feature not yet added.\n";
-        }
+            // delete
+        else if (ans == 5) {
+           cout<<"please choose what array you would like to delete from: ";
+            cin>> access;
+            switch(access){
+                int Itd;
+                
+                case  1:  
+                cout<<"You have chosen to delete at array A, this is the current list of array A:"<< endl;
+                A.display("array A");
+                cout<<"please enter the index that you want to delete,  please notet that once deleted , it cannot be undone ";
+                cin>> Itd;
+                A.deleteAt(Itd);
+                
+                    
+                break;
+
+                case 2:
+                cout<<"hye there you have chosen to delete at Araay B, this is the current list of Array B:";
+                B.display("Array B" );
+                cout<<"please enter the index that you want to delete at array B  please notet that once deleted , it cannot be undone";
+                cin>>Itd;
+                B.deleteAt(Itd);
+                    
+                break;
         
-         if (ans == 6) {
+            
+                
+
+            }
+            
+        }
+            // search
+        else if (ans == 6) {
+            cout<<"what class would you like to search student id from? Choose class for search  (1 for A, 2 for B):";
+            cin>> access;
+            int studentNum;
+            switch(access){
+                
+                
+                case 1:   
+                    cout<<"welcome to class A, please input the student number that you want to search here: ";
+                    cin>>studentNum;
+                    A.search(studentNum);
+                
+
+                break;
+
+
+                case 2: 
+                     cout<<"welcome to class B, please input the student number that you want to search here: ";
+                    cin>>studentNum;
+                    B.search(studentNum);
+                
+
+                break;
+
+            }
+           
+        }
+         // sort
+        else if (ans == 7) {
             cout << "Feature not yet added.\n";
         }
-         if (ans == 7) {
+            // catenate
+        else if (ans == 8) {
             cout << "Feature not yet added.\n";
         }
-         if (ans == 8) {
+            // merge
+        else if (ans == 9) {
             cout << "Feature not yet added.\n";
         }
-         if (ans == 9) {
-            cout << "Feature not yet added.\n";
-        }
-         if (ans == 10) {
+            //exit done
+        else if (ans == 10) {
             cout << "Exiting program.\n";
             loop = false;
         }
@@ -289,5 +377,8 @@ int main() {
 
     return 0;
 }
+
+
+
 
 
