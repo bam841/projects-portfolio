@@ -36,7 +36,6 @@ public:
     }
 
     // Replace - Replace a value at index k with new value
-// k represents the index 
     void replace(int k, int newValue) {
         if (k < 0 || k >= n) {
             cout << "Error: Index out of bounds , you might need to append a value first" << endl;
@@ -78,17 +77,16 @@ public:
     }
 
     // Search - Search for an element in the list
-  int search(int key) {
-    for (int i = 0; i < n; i++) {
-        if (data[i] == key) {
-            cout << "Data has been found at index " << i << endl;
-            return i;
+    int search(int key) {
+        for (int i = 0; i < n; i++) {
+            if (data[i] == key) {
+                cout << "Data has been found at index " << i << endl;
+                return i;
+            }
         }
+        cout << "Data not found" << endl;
+        return -1; // Not found
     }
-    cout << "Data not found" << endl;
-    return -1; // Not found
-}
-
 
     // BubbleSort - Sorts the list in ascending order
     void bubbleSort() {
@@ -102,7 +100,7 @@ public:
         cout << "Sort successful" << endl;
     }
 
-    // Export array data (for catenation/merge)
+    // Export array data
     void exportArray(int* arr) {
         for (int i = 0; i < n; i++) {
             arr[i] = data[i];
@@ -122,7 +120,6 @@ public:
         cout << "Total stored: " << n << "/" << MAX << endl;
     }
 
-    // Get the current size of the list
     int size() {
         return n;
     }
@@ -135,7 +132,7 @@ public:
         }
     }
 
-    // Catenate arr1 and arr2 into this list (for C)
+    // Catenate arr1 and arr2 into this list
     void catenate(const int* arr1, int n1, const int* arr2, int n2) {
         if (n1 + n2 > MAX) {
             cout << "Error: Not enough space to concatenate the two arrays" << endl;
@@ -148,7 +145,7 @@ public:
         cout << "Catenation successful" << endl;
     }
 
-    // Merge two sorted arrays into this list (for C)
+    // Merge two sorted arrays into this list
     void merge(const int* arr1, int n1, const int* arr2, int n2) {
         if (n1 + n2 > MAX) {
             cout << "Error: Not enough space to merge" << endl;
@@ -171,11 +168,10 @@ int main() {
     // Create three arrays
     ListSystem A(10); // Array A
     ListSystem B(10); // Array B
-    ListSystem C(20); // Array C (for catenate/merge results)
+    ListSystem C(20); // Array C
     B.append(10);
     A.append(21);
     B.append(22);
-    
 
     int ans;
     bool loop = true;
@@ -194,179 +190,91 @@ int main() {
         cout << "10. Exit\n";
         cout << "Enter your choice: ";
         cin >> ans;
-            // access
-        if (ans == 1) {
-            cout << "Which array do you want to access? (1 for A, 2 for B): ";
+
+        if (ans == 1) { // Access
+            cout << "Which array do you want to access? (1 for A, 2 for B, 3 for C): ";
             cin >> access;
-            switch (access) {
-                case 1:
-                    cout << "You chose array A.\n";
-                    A.display("Array A");
-                    break;
-                case 2:
-                    cout << "You chose array B.\n";
-                    B.display("Array B");
-                    break;
-                default:
-                    cout << "Invalid choice.\n";
-            }
+            if (access == 1) A.display("Array A");
+            else if (access == 2) B.display("Array B");
+            else if (access == 3) C.display("Array C");
+            else cout << "Invalid choice.\n";
         }
-            // apppend 
-        else if (ans == 2) {
+        else if (ans == 2) { // Append
             cout << "Which class do you want to add a student to? (1 for A, 2 for B): ";
             cin >> access;
-            switch (access) {
-                case 1:
-                    cout << "Current list of Class A:\n";
-                    A.display("Array A");
-                    cout << "Enter student number to append: ";
-                    cin >> studentNum;
-                    A.append(studentNum);
-                    break;
-                case 2:
-                    cout << "Current list of Class B:\n";
-                    B.display("Array B");
-                    cout << "Enter student number to append: ";
-                    cin >> studentNum;
-                    B.append(studentNum);
-                    break;
-                default:
-                    cout << "Invalid class choice.\n";
-            }
+            cout << "Enter student number to append: ";
+            cin >> studentNum;
+            if (access == 1) A.append(studentNum);
+            else if (access == 2) B.append(studentNum);
+            else cout << "Invalid class choice.\n";
         }
-            // replacement 
-        else if (ans == 3) {
+        else if (ans == 3) { // Replace
             cout << "Choose class for replacement (1 for A, 2 for B): ";
             cin >> access;
             int rep, newVal;
-            switch (access) {
-                case 1:
-                    cout << "Current list of Class A:\n";
-                    A.display("Array A");
-                    cout << "Enter index to replace: ";
-                    cin >> rep;
-                    cout << "Enter new student number: ";
-                    cin >> newVal;
-                    A.replace(rep, newVal);
-                    break;
-                case 2:
-                    cout << "Current list of Class B:\n";
-                    B.display("Array B");
-                    cout << "Enter index to replace: ";
-                    cin >> rep;
-                    cout << "Enter new student number: ";
-                    cin >> newVal;
-                    B.replace(rep, newVal);
-                    break;
-                default:
-                    cout << "Invalid class choice.\n";
-            }
+            cout << "Enter index to replace: ";
+            cin >> rep;
+            cout << "Enter new student number: ";
+            cin >> newVal;
+            if (access == 1) A.replace(rep, newVal);
+            else if (access == 2) B.replace(rep, newVal);
+            else cout << "Invalid class choice.\n";
         }
-            // insert
-        else if (ans == 4) {
+        else if (ans == 4) { // Insert
             int InsertVal, Ipos;
             cout << "Which class do you want to insert into? (1 for A, 2 for B): ";
             cin >> access;
-
-            switch (access) {
-                case 1:
-                    cout << "You chose array A.\n";
-                    A.display("Array A");
-                    cout << "Enter index where you want to insert: ";
-                    cin >> Ipos;
-                    cout << "Enter student id to insert: ";
-                    cin >> InsertVal;
-                    A.insert(Ipos, InsertVal);
-                    break;
-
-                case 2:
-                    cout << "You chose array B.\n";
-                    B.display("Array B");
-                    cout << "Enter index where you want to insert: ";
-                    cin >> Ipos;
-                    cout << "Enter student id to insert: ";
-                    cin >> InsertVal;
-                    B.insert(Ipos, InsertVal);
-                    break;
-
-                default:
-                    cout << "Invalid class choice.\n";
-            }
+            cout << "Enter index where you want to insert: ";
+            cin >> Ipos;
+            cout << "Enter student id to insert: ";
+            cin >> InsertVal;
+            if (access == 1) A.insert(Ipos, InsertVal);
+            else if (access == 2) B.insert(Ipos, InsertVal);
+            else cout << "Invalid class choice.\n";
         }
-            // delete
-        else if (ans == 5) {
-           cout<<"please choose what array you would like to delete from: ";
-            cin>> access;
-            switch(access){
-                int Itd;
-                
-                case  1:  
-                cout<<"You have chosen to delete at array A, this is the current list of array A:"<< endl;
-                A.display("array A");
-                cout<<"please enter the index that you want to delete,  please notet that once deleted , it cannot be undone ";
-                cin>> Itd;
-                A.deleteAt(Itd);
-                
-                    
-                break;
-
-                case 2:
-                cout<<"hye there you have chosen to delete at Araay B, this is the current list of Array B:";
-                B.display("Array B" );
-                cout<<"please enter the index that you want to delete at array B  please notet that once deleted , it cannot be undone";
-                cin>>Itd;
-                B.deleteAt(Itd);
-                    
-                break;
-        
-            
-                
-
-            }
-            
+        else if (ans == 5) { // Delete
+            cout << "Please choose what array you would like to delete from (1 for A, 2 for B): ";
+            cin >> access;
+            int Itd;
+            cout << "Enter index to delete: ";
+            cin >> Itd;
+            if (access == 1) A.deleteAt(Itd);
+            else if (access == 2) B.deleteAt(Itd);
+            else cout << "Invalid choice.\n";
         }
-            // search
-        else if (ans == 6) {
-            cout<<"what class would you like to search student id from? Choose class for search  (1 for A, 2 for B):";
-            cin>> access;
-            int studentNum;
-            switch(access){
-                
-                
-                case 1:   
-                    cout<<"welcome to class A, please input the student number that you want to search here: ";
-                    cin>>studentNum;
-                    A.search(studentNum);
-                
-
-                break;
-
-
-                case 2: 
-                     cout<<"welcome to class B, please input the student number that you want to search here: ";
-                    cin>>studentNum;
-                    B.search(studentNum);
-                
-
-                break;
-
-            }
-           
+        else if (ans == 6) { // Search
+            cout << "What class would you like to search from? (1 for A, 2 for B): ";
+            cin >> access;
+            int key;
+            cout << "Enter student number to search: ";
+            cin >> key;
+            if (access == 1) A.search(key);
+            else if (access == 2) B.search(key);
+            else cout << "Invalid choice.\n";
         }
-         // sort
-        else if (ans == 7) {
-            cout << "Feature not yet added.\n";
+        else if (ans == 7) { // Sort
+            cout << "Which class do you want to sort? (1 for A, 2 for B): ";
+            cin >> access;
+            if (access == 1) { A.bubbleSort(); A.display("Array A"); }
+            else if (access == 2) { B.bubbleSort(); B.display("Array B"); }
+            else cout << "Invalid choice.\n";
         }
-            // catenate
-        else if (ans == 8) {
-            cout << "Feature not yet added.\n";
+        else if (ans == 8) { // Catenate
+            int arrA[10], arrB[10];
+            A.exportArray(arrA);
+            B.exportArray(arrB);
+            C.catenate(arrA, A.size(), arrB, B.size());
+            C.display("Array C (Catenated)");
         }
-            // merge
-        else if (ans == 9) {
-            cout << "Feature not yet added.\n";
+        else if (ans == 9) { // Merge
+            int arrA[10], arrB[10];
+            A.bubbleSort(); B.bubbleSort(); // ensure sorted
+            A.exportArray(arrA);
+            B.exportArray(arrB);
+            C.merge(arrA, A.size(), arrB, B.size());
+            C.display("Array C (Merged)");
         }
-            //exit done
-        else if (ans == 10) {
+        else if (ans == 10) { // Exit
             cout << "Exiting program.\n";
             loop = false;
         }
@@ -374,11 +282,5 @@ int main() {
             cout << "Invalid choice. Try again.\n";
         }
     }
-
     return 0;
 }
-
-
-
-
-
