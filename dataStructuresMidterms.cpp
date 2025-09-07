@@ -3,7 +3,7 @@
 using namespace std;
 
 int access = 3;
-int studentNum = 0;
+int STN = 0;
 
 class ListSystem {
 private:
@@ -22,6 +22,13 @@ public:
     // Destructor to free the allocated memory
     ~ListSystem() {
         delete[] data;
+
+
+
+
+
+
+        
     }
 
     // Append - Adds a record to the end of the list
@@ -46,20 +53,23 @@ public:
     }
 
     // Insert - Inserts a value at position pos
-    void insert(int pos, int value) {
-        if (n == MAX) {
-            cout << "Error: Array is full" << endl;
-        } else if (pos < 0 || pos > n) {
-            cout << "Invalid position" << endl;
-        } else {
-            for (int i = n; i > pos; i--) {
-                data[i] = data[i - 1];
-            }
-            data[pos] = value;
-            n++;
-            cout << "Insertion successful" << endl;
+  void insert(int pos, int value) {
+    if (n == MAX) {
+        cout << "Error: Array is full" << endl;
+    } else if (pos < 0 || pos > n) {
+        cout << "Invalid position" << endl;
+    } else {
+        // Shift elements to the right starting from the last element down to pos
+        for (int i = n; i > pos; i--) {
+            data[i] = data[i - 1];
         }
+        data[pos] = value; // Insert new value at the desired position
+        n++;               // Increase count of elements
+        cout << "Insertion successful" << endl;
     }
+}
+
+
 
     // Delete - Deletes a value at position pos
     void deleteAt(int pos) {
@@ -167,7 +177,7 @@ public:
 int main() {
     // Create three arrays
     ListSystem A(10); // Array A
-    ListSystem B(10); // Array B
+    ListSystem B(20); // Array B
     ListSystem C(20); // Array C
     B.append(10);
     A.append(21);
@@ -181,10 +191,10 @@ int main() {
         cout << "1.  Access student attendance list\n";
         cout << "2.  Append student data to array\n";
         cout << "3.  Replace a student\n";
-        cout << "4.  Insert student in a scholarship slot\n";
+        cout << "4.  Insert student in a class slot\n";
         cout << "5.  Delete student data record\n";
         cout << "6.  Search for a student\n";
-        cout << "7.  Sort students by age\n";
+        cout << "7.  Sort students by id number\n";
         cout << "8.  Catenate students\n";
         cout << "9.  Merge all students\n";
         cout << "10. Exit\n";
@@ -203,9 +213,9 @@ int main() {
             cout << "Which class do you want to add a student to? (1 for A, 2 for B): ";
             cin >> access;
             cout << "Enter student number to append: ";
-            cin >> studentNum;
-            if (access == 1) A.append(studentNum);
-            else if (access == 2) B.append(studentNum);
+            cin >> STN;
+            if (access == 1) A.append(STN);
+            else if (access == 2) B.append(STN);
             else cout << "Invalid class choice.\n";
         }
         else if (ans == 3) { // Replace
@@ -284,3 +294,4 @@ int main() {
     }
     return 0;
 }
+
